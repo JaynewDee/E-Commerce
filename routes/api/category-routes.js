@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Products
   try {
     const catData = await Category.findAll({
-      include: [{model: Product}],
+      include: Product,
     });
     res.status(200).json(catData);
   } catch (err) {
@@ -33,4 +33,4 @@ router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
 });
 
-module.exports = router;
+module.exports = router; 

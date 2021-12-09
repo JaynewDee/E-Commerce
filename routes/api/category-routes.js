@@ -16,13 +16,32 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
+  try {
+    const singleCat = await Category.findByPk(req.params.id, {
+      include: Product
+    });
+
+    if (!singleCat) {
+      res.status(404).json({ message: 'No Category found with this ID!'});
+      return;
+    }
+    res.status(200).json(singleCat);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category
+  try {
+    const newCat = await Category.create(req.body);
+    res.status(200).json(newCat);
+  } catch (err) {
+    res.status(400).json(err)
+  }
 });
 
 router.put('/:id', (req, res) => {

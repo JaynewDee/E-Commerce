@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
     product_name: "Basketball",
     price: 20.00,
     stock: 3,
-    categoryId: 9, 
+    categoryId: 7,
     tagIds: [5, 6]
   }
 
